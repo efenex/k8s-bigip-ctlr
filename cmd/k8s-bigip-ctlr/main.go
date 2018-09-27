@@ -256,6 +256,8 @@ func _init() {
 	serverSSL = osRouteFlags.String("default-server-ssl", "",
 		"Optional, specify a user-created server ssl profile to be used as"+
 			" default for SNI for Route virtual servers")
+	routeVserverStrategy = osRouteFlags.String("route-vserver-strategy", "first-match",
+		"Optional, matching strategy for the managed Route object. Default is first-match, can be changed to best-match.")
 
 	osRouteFlags.Usage = func() {
 		fmt.Fprintf(os.Stderr, "  Openshift Routes:\n%s\n", osRouteFlags.FlagUsagesWrapped(width))
@@ -590,6 +592,7 @@ func main() {
 		HttpsVs:     *routeHttpsVs,
 		ClientSSL:   *clientSSL,
 		ServerSSL:   *serverSSL,
+		RouteVSStrat: *routeVserverStrategy,
 	}
 
 	var appMgrParms = appmanager.Params{

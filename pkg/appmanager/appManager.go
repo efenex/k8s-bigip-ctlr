@@ -160,6 +160,7 @@ type RouteConfig struct {
 	HttpsVs     string
 	ClientSSL   string
 	ServerSSL   string
+	RouteVSStrat string
 }
 
 // Create and return a new app manager that meets the Manager interface

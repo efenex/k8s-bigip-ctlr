@@ -173,6 +173,7 @@ func createRule(uri, poolName, partition, ruleName string) (*Rule, error) {
 	return &rl, nil
 }
 
+// TODO: this doesn't work because we don't have a routeConfig object here!
 func createPolicy(rls Rules, policyName, partition string) *Policy {
 	plcy := Policy{
 		Controls:  []string{"forwarding"},
@@ -181,7 +182,7 @@ func createPolicy(rls Rules, policyName, partition string) *Policy {
 		Partition: partition,
 		Requires:  []string{"http"},
 		Rules:     Rules{},
-		Strategy:  "/Common/first-match",
+		Strategy:  "/Common/" + routeConfig.RouteVSStrat,
 	}
 
 	plcy.Rules = rls
